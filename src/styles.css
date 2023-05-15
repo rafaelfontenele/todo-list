@@ -1,0 +1,94 @@
+
+:root {
+    --sidebar-blue: rgba(25, 146, 212, 1);
+    --background-grey: rgba(226,232,240,1);
+    --transition-time: 200ms;
+    --white: #fffbfb;
+    --grey: #f0eef1;
+    --black: #050505;
+    --red: #ff7070;
+    --light-green: #9fff9c;
+    --light-red: #ff9c9c;
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: sans-serif;
+    
+}
+
+.header {
+    background-color: rgb(145, 99, 99);
+    height: 15vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;  
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.header .dash-btn {
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    margin-left: 2%;
+    width: 4%;
+    height: auto;
+    padding: 5px;
+    z-index: 10;
+}
+
+.header .dash-btn:hover {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 15%;
+
+}
+
+.header .mid-text,
+.header .mid-text * {
+    font-size: 2rem;
+    margin-left: -10%;
+}
+.mid-text span:before {
+    content: '2';
+}
+
+.mid-text span:after {
+    content: 'Do';
+}
+
+.dashboard {
+    position: absolute;
+    top: 0%;
+    height: 100vh;
+    background-color: grey;
+    transition: all 200ms ease-in-out;
+    width: 0vw;
+    z-index: 9;
+    border-right: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 5%;
+}
+
+.dashboard.visible {
+    width: 20vw;
+}
+
+
+
+.icon {
+    width: 5vw;
+    height: 5vh;
+}

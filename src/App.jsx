@@ -1,33 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './styles.css'
+import { Header } from './Header'
+import { Dashboard } from './Dashboard'
+import { useState, useEffect } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showDashboard, setShowDashboard] = useState(false);
+  const [projects, setProjects] = useState({
+    'project1': [['dishes1', 2000, 0, crypto.randomUUID()], ['cook food1',2500, 0]],
+    'project2': [['dishes2', 2000, 0], ['cook food2',2500, 0]],
+    'project3': [['dishes3', 2000, 0], ['cook food3',2500, 0]],
+    'project4': [['dishes4', 2000, 0], ['cook food4',2500, 0]]
+  })
+
+  useEffect( () => {
+    const dashBtn = document.querySelector('.dash-btn');
+    
+    if (showDashboard) {
+      document.querySelector('.dashboard').classList.add('visible');
+      dashBtn.style.opacity = '0.5';
+
+      return
+    }
+    document.querySelector('.dashboard').classList.remove('visible');
+    dashBtn.style.opacity = '1';
+
+
+  }, [showDashboard])
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <>    
+     
+    <Header isDashVisible={showDashboard} toggleDashboard={() => setShowDashboard( prev => !prev)}/>
+    <Dashboard projects={projects} isShowing={showDashboard}/>
+
+
     </>
   )
 }
