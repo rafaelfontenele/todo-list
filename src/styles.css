@@ -20,8 +20,22 @@
     font-size: 20px;
     font-weight: 500;
     font-family: sans-serif;
-    
 }
+body {
+    overflow-y: hidden;
+}
+
+@media only screen and (max-width: 920px) {
+    * {
+        font-size: 8px;
+    }
+}
+@media only screen and (max-width: 460px) {
+    * {
+        font-size: 4px;
+    }
+}
+
 
 .header {
     background-color: rgb(145, 99, 99);
@@ -69,26 +83,133 @@
     top: 0%;
     height: 100vh;
     background-color: grey;
-    transition: all 200ms ease-in-out;
+    transition: all 400ms ease-in-out;
     width: 0vw;
     z-index: 9;
     border-right: 1px solid black;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 5%;
+    display: grid;
+    grid-template-rows: 15vh 1fr;
     align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 5%;
+    text-align: center;
+    padding: 0% 0% 2%;
+
 }
 
 .dashboard.visible {
-    width: 20vw;
+    animation: expand 300ms forwards;
+}
+.dashboard .dashboard-top {
+    position: relative;
+    left: 10%;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
+.dashboard-p-list {
+    display: grid;
+    grid-auto-rows: 8%;
+    border: 1px solid black;
+    height: 90%;
+    align-self: start;
+    border-right: none;
+    border-left: none;
+    background-color: rgba(255,255,255,0.6);
+    overflow-y: scroll;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+}
+
+::-webkit-scrollbar {
+    width: 1vw;
+  }
+::-webkit-scrollbar-track {
+background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
+
+.dashboard .project-btn {
+    cursor: pointer;
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.project-btn.visible {
+    opacity: 1;
+}
+
+.project-btn:hover {
+    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+    padding: 0% 37%;
+
+}
+
+.project-btn.checked {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+.project-btn.checked::before {
+    content: '~'
+}
+
+.newProjectForm {
+    background-color: orange;
+    width: 50vw;
+    height: 50vh;
+    position: absolute;
+    top: 25%;
+    right: 25%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: -1;
+    transition: all 300ms ease-in-out;
+}
+.newFormPlus-btn {
+    cursor: pointer;
+    margin-bottom: 5%;
+    border-radius: 30%;
+}
+.newFormPlus-btn:hover {
+    transform:scale(1.1);
+    background-color: rgba(255,255,255,0.2);
+}
+
+.newFormPlus-btn:active {
+    transform: scale(0.96);
+}
+
+.blackout {
+    position:absolute;
+    top:0%;
+    left:0%;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 15;
+}
 
 
 .icon {
     width: 5vw;
     height: 5vh;
 }
+
+
+
+@keyframes expand {
+    0% {width: 0%}
+    100% {width: 20%}
+}
+
