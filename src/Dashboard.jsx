@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Icon } from './Icon';
 
 
-export const Dashboard = ( {projects, isVisible, setCurrentProject, currentProject, setShowProjectForm} ) => {
+export const Dashboard = ( {projects, isVisible, setCurrentProject, currentProject, showProjectForm, setShowProjectForm} ) => {
     
     const classes = `dashboard ${isVisible ? 'visible' : 'hidden'}`
 

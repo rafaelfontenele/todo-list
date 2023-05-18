@@ -1,14 +1,16 @@
 import './styles.css'
 import { Header } from './Header';
 import { Dashboard } from './Dashboard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ProjectForm } from './ProjectForm';
+import { startKeyPressListener } from './utils/keyPress';
 
 
 
 function App() {
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [showProjectForm, setShowProjectForm] = useState(false);
-
+  const [showDashboard, setShowDashboard] = useState(true);
+  const [showPForm, setShowPForm] = useState(false);
+  
 
   const [projects, setProjects] = useState({
     'Cozinha': {1: ['Descongelar freezer', 2000, 0],
@@ -55,7 +57,14 @@ function App() {
   })
   const [currentProject, setCurrentProject] = useState('Cozinha');
 
+  const handleKeyPress = (e) => {
+    const keyPressed = (e.key == ' ') ? 'Space' : e.key;
+    
+    if (showPForm && keyPressed == 'Escape') {setShowPForm( (prev) => false)};
 
+  }
+
+  startKeyPressListener( handleKeyPress )
 
   return (
     <>    
@@ -63,11 +72,10 @@ function App() {
     <Header isDashVisible={showDashboard} toggleDashboard={() => setShowDashboard( prev => !prev)}/>
     <Dashboard projects={projects} isVisible={showDashboard} 
     setCurrentProject={setCurrentProject} currentProject={currentProject}
-     setShowProjectForm={setShowProjectForm}/>
+     showProjectForm={showPForm} setShowProjectForm={setShowPForm}/>
 
 
-    {showProjectForm && <ProjectForm setShowProjectForm={setShowProjectForm} />}
-
+    <ProjectForm setShowPForm={setShowPForm} showPForm={showPForm} />
 
     </>
   )
