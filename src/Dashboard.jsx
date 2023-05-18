@@ -24,7 +24,11 @@ export const Dashboard = ( {projects, isVisible, setCurrentProject, currentProje
 
             return (
 
-                <div className={classes} onClick={() => setCurrentProject(project)}  key={key}>{project}</div>
+                <div className={classes} onClick={() => setCurrentProject(project)}  key={key}>
+                    
+                    {project}
+                    
+                    </div>
 
             )
 

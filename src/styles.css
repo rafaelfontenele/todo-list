@@ -9,6 +9,9 @@
     --red: #ff7070;
     --light-green: #9fff9c;
     --light-red: #ff9c9c;
+    --main-color: rgba(145, 99, 99, 1);
+    --form-color: rgba(200, 200, 200, 0.4)
+    --main-font: sans-serif;
 
 }
 
@@ -19,7 +22,7 @@
     box-sizing: border-box;
     font-size: 20px;
     font-weight: 500;
-    font-family: sans-serif;
+    font-family: var(--main-font), sans-serif;
 }
 body {
     overflow-y: hidden;
@@ -38,7 +41,7 @@ body {
 
 
 .header {
-    background-color: rgb(145, 99, 99);
+    background-color: var(--main-color);
     height: 15vh;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;  
     border-bottom: 1px solid rgba(0,0,0,0.4);
@@ -197,8 +200,13 @@ background: #555;
 }
 
 .project-form {
-    background-color: orange;
-    border-radius: 10%;
+    background-color: var(--form-color);
+    border: 1px solid black;
+    border-radius: 5%;
+    padding: 2% 0%;
+    display: grid;
+    grid-template-rows: 20% 1fr 1fr 20%;
+    align-items: center;
     position: absolute;
     top: 25%;
     right: 25%;
@@ -207,6 +215,62 @@ background: #555;
     z-index: 22;
     transition: all 500ms ease-in-out;
 }
+
+.project-form h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: var(--main-font), sans-serif;
+    grid-row: 1;
+    margin-bottom: 5%;
+}
+
+.project-form label {
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.project-form button {
+    width: 30%;
+    height: 100%;
+    align-self: center;
+    justify-self: center;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+}
+
+.project-form button:hover {
+    transform: scale(1.02);
+}
+
+.project-form button:active {
+    transform: scale(0.98);
+}
+
+.newForm-icon-wrapper {
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.newProjectIcon-selector {
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.newProjectIcon-selector:hover {
+    transform: scale(1.1);
+}
+
 
 
 .blackout.inactive {
@@ -226,6 +290,7 @@ background: #555;
 
 .project-form.active {
     pointer-events: all;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .icon {

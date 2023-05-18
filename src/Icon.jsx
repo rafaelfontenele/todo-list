@@ -5,7 +5,6 @@ export const Icon = ( {iconName, className, onClick, style} ) => {
 
   const iconUrl = `src/assets/${iconName}.svg`;
   const classes = `icon ${className}`;
-  
 
     return(
 
