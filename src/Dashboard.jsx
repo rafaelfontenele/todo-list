@@ -66,9 +66,9 @@ export const Dashboard = ( {projects, setProjects, isVisible,
                      
                     />
 
-                    <img src={iconSrc} alt='' />
 
                     {project.name}
+                    <img src={iconSrc} alt='Project-icon' />
                     
                     </div>
                     

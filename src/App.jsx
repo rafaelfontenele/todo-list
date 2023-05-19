@@ -1,29 +1,45 @@
 import './styles.css'
 import { Header } from './Header';
 import { Dashboard } from './Dashboard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProjectForm } from './ProjectForm';
 import { startKeyPressListener } from './utils/keyPress';
 import { v4 as randomID } from 'uuid';
-
+import { MainDisplay } from './MainDisplay';
 
 
 function App() {
-  const [showDashboard, setShowDashboard] = useState(1);
-  const [showPForm, setShowPForm] = useState(false);
-
-
-
+  const [showDashboard, setShowDashboard] = useState(false);
+  const [showPForm, setShowPForm] = useState(false); 
   const [projects, setProjects] = useState([
 
     {
       name: '1Cozinha',
       id: randomID(),
       iconName: 'star',
-      tasks: [
-        ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
-      ]
-    },
+      tasks:   [
+          {name: 'cook dinner',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'Do something else',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'whatever',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'randomName()',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+  ]
+},
 
     {
       name: '2Cozinha',
@@ -60,13 +76,10 @@ function App() {
         ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
       ]
     }
-
-
   ])
+  const [currentProject, setCurrentProject] = useState(projects[0]);
 
-  const [currentProject, setCurrentProject] = useState('Lala');
-  const validKeys = ['Escape'];
-
+  
   
   const handleKeyPress = (e) => {
     const keyPressed = (e.key)
@@ -94,8 +107,10 @@ function App() {
 
 }
 
-  const addProject = (project) => {
-    ///
+  const addProject = (newProject) => {
+    
+    setProjects([...projects, newProject])
+
   }
 
 
@@ -109,7 +124,9 @@ function App() {
      deleteProject={deleteProject} />
 
 
-    <ProjectForm setShowPForm={setShowPForm} showPForm={showPForm} />
+    <ProjectForm projects={projects} setShowPForm={setShowPForm} showPForm={showPForm} addProject={addProject} />
+
+    <MainDisplay currentProject={currentProject} showDashboard={showDashboard} />
 
     </>
   )

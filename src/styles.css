@@ -10,9 +10,8 @@
     --light-green: #9fff9c;
     --light-red: #ff9c9c;
     --main-color: rgba(145, 99, 99, 1);
-    --form-color: rgba(200, 200, 200, 0.8);
+    --form-color: rgba(200, 200, 200, 0.9);
     --main-font: sans-serif;
-
 }
 
 
@@ -132,16 +131,16 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 1vw;
+    width: 0.6vw;
  }
 ::-webkit-scrollbar-track {
-background: #f1f1f1;
+background: #9c9c9c;
 }
 ::-webkit-scrollbar-thumb {
-background: #888;
+background: #525252;
 }
 ::-webkit-scrollbar-thumb:hover {
-background: #555;
+background: #2c2c2c;
 }
 
 .dashboard .project-btn {
@@ -316,9 +315,47 @@ background: #555;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.submit-btn {
+    background-color: rgba(200,0,0,0.3);
+}
+.submit-btn:hover {
+    transform: scale(1);
+    cursor:not-allowed;
+}
+.submit-btn.active {
+    background-color: rgba(0,200,0,0.2);
+}
+.submit-btn.active:hover {
+    cursor: pointer;
+}
+
 .icon {
     width: 5vw;
     height: 5vh;
+}
+
+.main-wrapper {
+    border: 1px solid rgba(0,0,0,0.4);
+    width: 100vw;
+    height: 85vh;
+    transition: all 300ms ease-in-out;
+    display: grid;
+    grid-template-rows: 10%;
+    padding: 2% 5%;
+}
+.task {
+    color: blue;
+    border: 1px solid brown;
+    width: 100%;
+}
+.new-task-input {
+    border: 1px solid orange;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
 }
 
 
@@ -333,8 +370,8 @@ background: #555;
 }
 
 @keyframes expand {
-    0% {width: 0%}
-    100% {width: 20%}
+    0% {width: 0vw}
+    100% {width: 20vw}
 }
 
 

@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon } from './Icon';
-
+import { v4 as randomID } from 'uuid';
 
 export const ProjectForm = (props) => {
-    const [newProjectName , setnewProjectName] = useState('');
-    const [newProjectIcon, setnewProjectIcon] = useState('star');
+    const [newProjectName , setnewProjectName] = useState('aaaa');
+    const [newProjectIcon, setnewProjectIcon] = useState('house');
 
     const isActive = (props.showPForm) ? 'active' : 'inactive';
     const blackoutClasses = `blackout ${isActive}`;
     const formClasses = `project-form ${isActive}`;
 
+    
     const closeForm = (e) => {
-        e.stopPropagation();
+        if (e) e.stopPropagation();
         props.setShowPForm();
+        setTimeout( () => setnewProjectIcon( (prev) => 'house'), 500);
+        setTimeout( () => setnewProjectName( (prev) => ''), 500);
 
     }
     const handleIconClick = (e) => {
@@ -21,17 +24,23 @@ export const ProjectForm = (props) => {
         
         setnewProjectIcon( (prev) => iconName);
     }
-
+ 
     const handleNewProjectSubmit = () => {
         if (newProjectIcon == '' || newProjectName == '') {
-            console.log('Empty ERROR');
             return
         }
 
-        console.log('valid');
+        const newProject = {
+            name: newProjectName,
+            id: randomID(),
+            iconName: newProjectIcon,
+            tasks: []
+        }
+        props.addProject(newProject);
+        
+        
+        closeForm();
 
-        setnewProjectIcon( (prev) => '')
-        setnewProjectName( (prev) => '')
     }
 
     const iconNames = [
@@ -44,6 +53,7 @@ export const ProjectForm = (props) => {
         'gear',
     ]
 
+    const submitButtonClasses = `submit-btn ${(newProjectIcon && newProjectName) ? 'active' : null}`
 
     return (
         <>
@@ -56,8 +66,8 @@ export const ProjectForm = (props) => {
 
             <div className="inputWrapper">
 
-                <label htmlFor="projectName" >Project Name:
-                <input type="text" id='projectName' value={newProjectName} onChange={(e) => setnewProjectName( (prev) => (e.target.value))}/>
+                <label htmlFor="projectName" >Project Name
+                <input type="text" id='projectName' maxLength={12} value={newProjectName} onChange={(e) => setnewProjectName( (prev) => (e.target.value))}/>
                 </label>
 
             </div>
@@ -73,7 +83,7 @@ export const ProjectForm = (props) => {
 
             </div>
 
-            <button onClick={() => handleNewProjectSubmit()}>Create Project</button>
+            <button className={submitButtonClasses} onClick={() => handleNewProjectSubmit()}>Create Project</button>
 
 
 
