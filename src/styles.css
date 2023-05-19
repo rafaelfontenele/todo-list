@@ -10,7 +10,7 @@
     --light-green: #9fff9c;
     --light-red: #ff9c9c;
     --main-color: rgba(145, 99, 99, 1);
-    --form-color: rgba(200, 200, 200, 0.4)
+    --form-color: rgba(200, 200, 200, 0.8);
     --main-font: sans-serif;
 
 }
@@ -100,14 +100,18 @@ body {
 }
 
 .dashboard.visible {
-    animation: expand 300ms forwards;
+    animation: expand 600ms forwards;
 }
 .dashboard .dashboard-top {
     position: relative;
     left: 10%;
     font-size: 2rem;
     font-weight: bold;
+    opacity: 0;
+    animation: fadeIn 1000ms linear forwards;
 }
+
+
 
 .dashboard-p-list {
     display: grid;
@@ -120,12 +124,16 @@ body {
     background-color: rgba(255,255,255,0.6);
     overflow-y: scroll;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    opacity: 0;
+    animation: fadeIn 1000ms linear forwards;
+    overflow-x: hidden;
+    direction: rtl;
 
 }
 
 ::-webkit-scrollbar {
     width: 1vw;
-  }
+ }
 ::-webkit-scrollbar-track {
 background: #f1f1f1;
 }
@@ -139,40 +147,51 @@ background: #555;
 .dashboard .project-btn {
     cursor: pointer;
     opacity: 0;
-    transition: all 300ms ease-in-out;
+    transition: all 50ms ease-in-out;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0% 8% 0% 6%;
+    gap: 2%;
     align-items: center;
 }
+
 .project-btn.visible {
     opacity: 1;
 }
 
 .project-btn:hover {
-    background-color: rgba(0,0,0,0.4);
-    text-align: center;
-    padding: 0% 37%;
-
+    background-color: rgba(0,0,0,0.2);
+    padding: 0% -10% 0% 10%;
 }
 
 .project-btn.checked {
     animation: checked 70ms linear forwards;
 }
 
-@keyframes checked {
-    100% {
-        font-weight: bold;
-        font-style: italic;
-        font-size: 1.2rem;
-    }
-}
-
 
 .project-btn.checked::before {
-    content: '~'
+    content: ''
 }
 
+.project-btn.checked::after {
+    content: '~'
+}
+.project-btn img {
+    width: 1rem;
+}
+
+
+.delete-p-btn {
+    margin-left: auto;
+    transition: all 200ms ease-in-out;
+}
+.delete-p-btn.second-click {
+    animation: deleteIcon 500ms linear infinite;
+}
+.delete-p-btn:hover {
+    transform: scale(1.05);
+}
 
 .newFormPlus-btn {
     cursor: pointer;
@@ -205,7 +224,7 @@ background: #555;
     border-radius: 5%;
     padding: 2% 0%;
     display: grid;
-    grid-template-rows: 20% 1fr 1fr 20%;
+    grid-template-rows: 20% 1fr 1.5fr 20%;
     align-items: center;
     position: absolute;
     top: 25%;
@@ -252,7 +271,6 @@ background: #555;
 }
 
 .newForm-icon-wrapper {
-    background-color: orange;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -268,6 +286,11 @@ background: #555;
 }
 
 .newProjectIcon-selector:hover {
+    transform: scale(1.1);
+}
+
+.newProjectIcon-selector.checked {
+    filter: invert(100%);
     transform: scale(1.1);
 }
 
@@ -300,8 +323,36 @@ background: #555;
 
 
 
+@keyframes checked {
+    100% {
+        font-weight: bold;
+        font-style: italic;
+        font-size: 1.15rem;
+        padding-left: -5%;
+    }
+}
+
 @keyframes expand {
     0% {width: 0%}
     100% {width: 20%}
 }
 
+
+@keyframes deleteIcon {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+
+    }
+}

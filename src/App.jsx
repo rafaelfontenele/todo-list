@@ -4,58 +4,109 @@ import { Dashboard } from './Dashboard';
 import { useState } from 'react';
 import { ProjectForm } from './ProjectForm';
 import { startKeyPressListener } from './utils/keyPress';
+import { v4 as randomID } from 'uuid';
 
 
 
 function App() {
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [showPForm, setShowPForm] = useState(true);
+  const [showDashboard, setShowDashboard] = useState(1);
+  const [showPForm, setShowPForm] = useState(false);
+
+
+
+  const [projects, setProjects] = useState([
+
+    {
+      name: '1Cozinha',
+      id: randomID(),
+      iconName: 'star',
+      tasks: [
+        ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
+      ]
+    },
+
+    {
+      name: '2Cozinha',
+      id: randomID(),
+      iconName: 'star',
+      tasks: [
+        ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
+      ]
+    },
+
+    {
+      name: '3Cozinha',
+      id: randomID(),
+      iconName: 'star',
+      tasks: [
+        ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
+      ]
+    },
+
+    {
+      name: '4Cozinha',
+      id: randomID(),
+      iconName: 'star',
+      tasks: [
+        ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
+      ]
+    },
+
+    {
+      name: '5Cozinha',
+      id: randomID(),
+      iconName: 'star',
+      tasks: [
+        ['cook dinner', 'make sandwich', 'clean dishes', 'clean oven', 'buy groceries']
+      ]
+    }
+
+
+  ])
+
+  const [currentProject, setCurrentProject] = useState('Lala');
+  const validKeys = ['Escape'];
+
   
-
-  const [projects, setProjects] = useState({
-    'Cozinha': {1: ['Descongelar freezer', 2000, 0],
-                 2: ['Lavar louça',2500, 0]},
-    'Casa': {3: ['Mudar lampadas', 2000, 0],
-                 4:['Limpar casa',2500, 0]},
-    'Comida': {5: ['Comprar arroz', 2000, 0],
-                 6:['Fritar carne',2500, 0]},
-    'Trabalho': {7: ['Estudar React', 2000, 0],
-                8: ['Fazer landing page',2500, 0]},
-    'Project10': {9: ['Descongelar freezer', 2000, 0],
-                 2: ['Lavar louça',2500, 0]},
-    'Project11': {3: ['Mudar lampadas', 2000, 0],
-                 4:['Limpar casa',2500, 0]},
-    'Project12': {5: ['Comprar arroz', 2000, 0],
-                 6:['Fritar carne',2500, 0]},
-                
-  })
-  const [currentProject, setCurrentProject] = useState('Cozinha');
-
   const handleKeyPress = (e) => {
-    const keyPressed = (e.key == ' ') ? 'Space' : e.key;
-    
+    const keyPressed = (e.key)
+    if (e.repeat) return;
+        
     if (keyPressed == 'Escape') {
       if (showPForm) {
         setShowPForm(false);
         return
       }
+      
       if (showDashboard) {
         setShowDashboard(false);
+        return
       }
     }
-
-
   }
 
   startKeyPressListener( handleKeyPress )
+ 
+ 
+  const deleteProject = (deleteItem) => {
+
+    setProjects(projects.filter(p => p.id !== deleteItem.id))
+
+}
+
+  const addProject = (project) => {
+    ///
+  }
+
 
   return (
     <>    
      
     <Header isDashVisible={showDashboard} toggleDashboard={() => setShowDashboard( prev => !prev)}/>
-    <Dashboard projects={projects} isVisible={showDashboard} 
+    <Dashboard projects={projects} setProjects={setProjects} isVisible={showDashboard} 
     setCurrentProject={setCurrentProject} currentProject={currentProject}
-     showProjectForm={showPForm} setShowProjectForm={setShowPForm}/>
+     showProjectForm={showPForm} setShowProjectForm={setShowPForm}
+     deleteProject={deleteProject} />
 
 
     <ProjectForm setShowPForm={setShowPForm} showPForm={showPForm} />

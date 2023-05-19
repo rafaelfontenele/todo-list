@@ -22,9 +22,16 @@ export const ProjectForm = (props) => {
         setnewProjectIcon( (prev) => iconName);
     }
 
-    const handleSubmit = () => {
-        alert(newProjectName);
+    const handleNewProjectSubmit = () => {
+        if (newProjectIcon == '' || newProjectName == '') {
+            console.log('Empty ERROR');
+            return
+        }
 
+        console.log('valid');
+
+        setnewProjectIcon( (prev) => '')
+        setnewProjectName( (prev) => '')
     }
 
     const iconNames = [
@@ -42,7 +49,7 @@ export const ProjectForm = (props) => {
         <>
         
         <div className={blackoutClasses} onClick={(e) => closeForm(e)}></div>
-        <div className={formClasses}  onKeyDown={(e) => console.log(e)}>
+        <div className={formClasses}>
 
 
             <h1>New project:</h1>
@@ -57,15 +64,16 @@ export const ProjectForm = (props) => {
 
             <div className="newForm-icon-wrapper">
 
-            {iconNames.map( iconName => {
-                return <Icon iconName={iconName} className='newProjectIcon-selector' onClick={handleIconClick}/>
+            {iconNames.map( (iconName, index) => {
+                const classes = `newProjectIcon-selector ${iconName == newProjectIcon ? 'checked' : ''}`
+                return <span key={index}><Icon iconName={iconName} className={classes} onClick={handleIconClick} /></span>
 
             })}
 
 
             </div>
 
-            <button onClick={() => handleSubmit()}>Create Project</button>
+            <button onClick={() => handleNewProjectSubmit()}>Create Project</button>
 
 
 

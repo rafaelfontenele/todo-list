@@ -2,9 +2,38 @@ import { useState, useEffect } from 'react';
 import { Icon } from './Icon';
 
 
-export const Dashboard = ( {projects, isVisible, setCurrentProject, currentProject, showProjectForm, setShowProjectForm} ) => {
+export const Dashboard = ( {projects, setProjects, isVisible, 
+    setCurrentProject, currentProject, showProjectForm, setShowProjectForm, deleteProject} ) => {
     
-    const classes = `dashboard ${isVisible ? 'visible' : 'hidden'}`
+    const [deleteClicked, setDeleteClicked] = useState([]);
+
+    const classes = `dashboard ${isVisible ? 'visible' : 'hidden'}`;
+    
+    const handleDeleteClick = (event, projectClicked) => {
+        event.stopPropagation();
+
+        if (deleteClicked.includes(projectClicked)) {
+
+            setProjects(projects.filter( p => p.id !== projectClicked.id));
+            return
+            
+        }
+
+        setDeleteClicked(prev => [projectClicked, ...prev]); 
+        
+    }
+
+
+
+     useEffect( () => {
+
+        const timer = setTimeout( () => {
+            setDeleteClicked(deleteClicked.slice(1));
+        }, 1500)
+
+        return () => { clearTimeout(timer);}
+
+    }, [deleteClicked])
 
 
 
@@ -18,21 +47,32 @@ export const Dashboard = ( {projects, isVisible, setCurrentProject, currentProje
 
         <div className="dashboard-p-list">
             
-            {Object.keys(projects).map( (project) => {
-            const key = crypto.randomUUID();
-            const classes = `project-btn ${isVisible ? "visible" : ""} ${(currentProject == project) ? " checked" : ""}`
+            {projects.map( (project) => {
+                const classes = `project-btn ${isVisible ? "visible" : ""} ${(currentProject == project) ? " checked" : ""}`
+                const iconSrc = `src/assets/${project.iconName}.svg`
+                const firstClickedDelete = deleteClicked.includes(project);
+                const deleteIconClasses = `delete-p-btn ${firstClickedDelete ? 'second-click' : null}`;
+                const style = { 
+                    backgroundColor: `${firstClickedDelete ? 'rgba(255,0,0,0.6)' : ''}` 
+                };
 
             return (
 
-                <div className={classes} onClick={() => setCurrentProject(project)}  key={key}>
+                <div className={classes} style={style} onClick={() => setCurrentProject(project)}  key={project.id}>
                     
-                    {project}
+
+
+                    <Icon iconName={firstClickedDelete ? 'xIcon' : 'trash-can'} onClick={(e) => handleDeleteClick(e, project)} className={deleteIconClasses}
+                     
+                    />
+
+                    <img src={iconSrc} alt='' />
+
+                    {project.name}
                     
                     </div>
-
+                    
             )
-
-
         })}
         
         
