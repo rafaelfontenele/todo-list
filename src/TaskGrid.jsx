@@ -1,6 +1,3 @@
-import { Task } from './Task';
-
-
 export const TaskGrid = ( props ) => {
 
     const taskList = props.currentProject.tasks;
@@ -10,8 +7,12 @@ export const TaskGrid = ( props ) => {
         <div className="task-grid">
 
         {taskList.map( task => {
-            return (<Task task={ task } />)
-        })}
+            return (
+
+                <div className="task" key={task.id}> {task.name} </div>
+
+            )
+})}
 
 
         </div>

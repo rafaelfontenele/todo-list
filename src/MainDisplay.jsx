@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { TaskGrid } from './TaskGrid';
-import { Task } from './Task';
 import { NewTaskInput } from './NewTaskInput';
 
 export const MainDisplay = ( props ) => {
@@ -10,13 +8,14 @@ export const MainDisplay = ( props ) => {
 
 
     return (
-    <>
         
+        <div className="main-wrapper" style={ style }>
+
         <NewTaskInput currentProject={props.currentProject} />
 
         <TaskGrid currentProject={props.currentProject} />
         
+        </div>
         
-    </>
     )
 }
