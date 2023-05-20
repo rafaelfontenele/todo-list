@@ -21,7 +21,6 @@ export const TaskGrid = ( props ) => {
     return (
 
         <div className="task-grid">
-            <h1>{props.currentProject.name}</h1>
         {taskList.length == 0 && (
             <div className="empty-tasks">No tasks to display</div>
 )}

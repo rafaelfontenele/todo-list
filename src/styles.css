@@ -170,11 +170,12 @@ background: #2c2c2c;
 
 
 .project-btn.checked::before {
-    content: ''
+    content: '';
+    margin-right: -2%;
 }
 
 .project-btn.checked::after {
-    content: '~'
+    content: '~';
 }
 .project-btn img {
     width: 1rem;
@@ -339,42 +340,47 @@ background: #2c2c2c;
     height: 85vh;
     transition: all 500ms ease-in-out;
     display: grid;
-    grid-template-rows: 10%;
+    grid-template-rows: 10% 10% 80%;
     padding: 2% 5%;
 }
 .task-grid {
     width: 100%;
     height: 100%;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.33) 0px 10px 20px, rgba(0, 0, 0, 0.33) 0px 6px 6px;
+    border: 1px solid rgba(0,0,0,0.4);
     background-color: rgba( 0,0,0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    display: grid;
+    grid-auto-rows: 15%;
+    gap: 0.3%;
+    padding: 2% 0%;
+    overflow-y: scroll;
 }
-.task-grid h1 {
+
+.task-grid-title {
     font-size: 1.8rem;
     font-weight: bold;
-    position: relative;
-    top: 0%;
-    left: 0%;
+    margin-bottom: 1%;
+    text-align: center;
+
 }
 
 .task {
-    width: 100%;
     opacity: 0;
     animation: fadeIn 1000ms forwards 1;
+    width: 80%;
     height: fit-content;
     font-size: 1.3rem;
     border: 1px solid rgba(0,0,0,0.4);
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    width: 80%;
+    align-self: center;
+    justify-self: center;
     display: flex;
     justify-content: space-between;
     padding-left: 15%;
     text-decoration: line-through;
     text-decoration-color: transparent;
+    margin: 0.5% 0%;
 
 
 }
@@ -395,11 +401,22 @@ background: #2c2c2c;
 .empty-tasks {
     opacity: 0;
     animation: fadeIn 3000ms forwards 1;
-    text-align: center;
-    align-self: center;
     justify-self: center;
+    grid-row: 4;
     font-size: 2rem;
 }
+
+.new-task-input {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+
+
 
 @keyframes fadeIn {
     100% {
@@ -416,21 +433,6 @@ background: #2c2c2c;
         text-decoration-color: black;
     }
 }
-
-.new-task-input {
-    border: 1px solid orange;
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5%;
-}
-
-
-
-
-
 
 @keyframes checked {
     100% {

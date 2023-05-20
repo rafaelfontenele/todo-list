@@ -11,7 +11,10 @@ export const MainDisplay = ( props ) => {
         
         <div className="main-wrapper" style={ style }>
 
+        <div className='task-grid-title'> {props.currentProject.name}'s tasks </div>
+        
         <NewTaskInput currentProject={props.currentProject}  addTask={props.addTask} />
+        
 
         <TaskGrid currentProject={props.currentProject} removeTask={props.removeTask}/>
         

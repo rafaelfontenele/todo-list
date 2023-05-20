@@ -37,6 +37,44 @@ function App() {
             dueDate: '23/05/2023',
             completed: false,
             id: randomID()},
+            {name: 'cook dinner',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'Do something else',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'whatever',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'randomName()',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+            {name: 'cook dinner',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'Do something else',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'whatever',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
+
+          {name: 'lastone()',
+            dueDate: '23/05/2023',
+            completed: false,
+            id: randomID()},
 
   ]
 },
