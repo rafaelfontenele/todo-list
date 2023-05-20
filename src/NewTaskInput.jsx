@@ -1,12 +1,23 @@
 import { useState } from 'react';
 
 export const NewTaskInput = ( props ) => {
-    const [newTask, setNewTask] = useState({})
+    const [newTask, setNewTask] = useState({'name': '', 'dueDate': ''})
 
     const handleNewTaskSubmit = () => {
-
+        
+        console.log('submit');
         console.log(newTask);
 
+
+    }
+
+    const x = (e) => {
+        const value = e.target.value;
+
+        setNewTask( prev => ({
+            ...prev,
+            name: value
+        }));
     }
 
    
@@ -21,7 +32,7 @@ export const NewTaskInput = ( props ) => {
                 <input type="date" id='taskDueDate'/>
             </label>
 
-            <button className='task-submit-btn' onClick={() => handleNewTaskSubmit}>Create task</button>
+            <button className='task-submit-btn' onClick={() => handleNewTaskSubmit()}>Create task</button>
 
 
         </div>
