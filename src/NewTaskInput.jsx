@@ -8,10 +8,6 @@ export const NewTaskInput = ( props ) => {
                 <input type="text" id='taskName'/>
             </label>
 
-            <label htmlFor="taskCheck">Completed
-                <input type="checkbox" id='taskCheck'/>
-            </label>
-
             <label htmlFor="taskDueDate">Date: 
                 <input type="date" id='taskDueDate'/>
             </label>

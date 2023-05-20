@@ -335,19 +335,88 @@ background: #2c2c2c;
 }
 
 .main-wrapper {
-    border: 1px solid rgba(0,0,0,0.4);
     width: 100vw;
     height: 85vh;
-    transition: all 300ms ease-in-out;
+    transition: all 500ms ease-in-out;
     display: grid;
     grid-template-rows: 10%;
     padding: 2% 5%;
 }
-.task {
-    color: blue;
-    border: 1px solid brown;
+.task-grid {
     width: 100%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    background-color: rgba( 0,0,0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
+.task-grid h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: relative;
+    top: 0%;
+    left: 0%;
+}
+
+.task {
+    width: 100%;
+    opacity: 0;
+    animation: fadeIn 1000ms forwards 1;
+    height: fit-content;
+    font-size: 1.3rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15%;
+    text-decoration: line-through;
+    text-decoration-color: transparent;
+
+
+}
+
+.task.checked .checkmark {
+    opacity: 1;
+    cursor: progress;
+}
+.task.checked {
+    animation: deleteTask 3000ms linear 1;
+}
+
+.checkmark:hover {
+    transform: scale(1.05);
+    cursor:pointer;
+}
+
+.empty-tasks {
+    opacity: 0;
+    animation: fadeIn 3000ms forwards 1;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    font-size: 2rem;
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes deleteTask {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.4;
+        text-decoration-color: black;
+    }
+}
+
 .new-task-input {
     border: 1px solid orange;
     width: 100%;
@@ -357,6 +426,9 @@ background: #2c2c2c;
     align-items: center;
     gap: 5%;
 }
+
+
+
 
 
 
