@@ -12,7 +12,16 @@ function App() {
   const [showDashboard, setShowDashboard] = useState(false);
   const [showPForm, setShowPForm] = useState(false); 
   const [projects, setProjects] = useState([
-
+    {
+      name: 'test',
+      id: randomID(),
+      iconName: 'star',
+      tasks:   [
+        {name: 'cook dinner',
+        dueDate: '23/05/2023',
+        completed: false,
+        id: randomID()},
+      ]},
     {
       name: '1Cozinha',
       id: randomID(),
@@ -193,7 +202,7 @@ function App() {
         ]      
     }
   ])
-  const [currentProject, setCurrentProject] = useState(projects[0]);
+
 
   
   
@@ -216,7 +225,8 @@ function App() {
 
   startKeyPressListener( handleKeyPress )
  
- 
+  const [currentProject, setCurrentProject] = useState(projects[0]);
+
   const deleteProject = (deleteProject) => {
 
     setProjects(projects.filter(p => p.id !== deleteProject.id))
@@ -230,9 +240,20 @@ function App() {
 
   }
   const addTask = (newTask, projectId) => {
-    _changedProject = projects.filter(project => project.id === projectId);
-    _changedProject.tasks = [..._changedProject.tasks, newTask];
-    setProjects( [...projects.filter( p => p.id !== projectId), _changedProject] )
+    return
+    newTask = {name: newTask.name, dueDate: newTask.dueDate}
+    const _projects = [...projects];
+
+    _projects.map( project => {
+      if (project.id === projectId) {
+        console.log(project.tasks);
+        project.tasks = [...project.tasks, newTask];
+
+      }
+    })
+    setProjects( prev => {
+      [..._projects];
+    })
 
   }
 
@@ -241,8 +262,10 @@ function App() {
     _projects.map( project => {
            project.tasks = project.tasks.filter( item => item.id !== taskId);
     })
-    setProjects([..._projects]);
+    setProjects(prev => [..._projects]);
   }
+
+  
 
 
   return (

@@ -377,7 +377,7 @@ background: #2c2c2c;
     justify-self: center;
     display: flex;
     justify-content: space-between;
-    padding-left: 15%;
+    padding: 1% 0% 1% 12%;
     text-decoration: line-through;
     text-decoration-color: transparent;
     margin: 0.5% 0%;
