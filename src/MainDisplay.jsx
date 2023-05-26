@@ -10,15 +10,20 @@ export const MainDisplay = ( props ) => {
     return  (
     
         <div className="main-wrapper" style={ style }>
-
-        <div className='task-grid-title'> {props.currentProject.name}'s tasks </div>
         
-        <NewTaskInput currentProject={props.currentProject}  addTask={props.addTask} />
+        {!projectIsSelected && (
+            <div className="no-project-main-display">No projects to display</div>
+        )}
+
         
 
-        <TaskGrid currentProject={props.currentProject} removeTask={props.removeTask}/>
+        {projectIsSelected && <div className='task-grid-title'> {props.currentProject.name}'s tasks </div>}
+        {projectIsSelected && <NewTaskInput currentProject={props.currentProject}  addTask={props.addTask} />}
+        {projectIsSelected && <TaskGrid currentProject={props.currentProject} removeTask={props.removeTask}/>}
+        
 
-        </div> 
+
+        </div>
         
     )
 }

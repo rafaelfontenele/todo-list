@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 export const NewTaskInput = ( props ) => {
 
-    const [newTask, setNewTask] = useState({name: '', dueDate: new Date() })
-    const handleNewTaskSubmit = () => {
-        if (!newTask.name || !newTask.dueDate) { console.log('invalid new task'); return}
 
+    const [newTask, setNewTask] = useState({name: '', dueDate: new Date() })
+    const [invalidTask, setInvalidTask] = useState(false);
+    
+    const handleNewTaskSubmit = () => {
+        if (!newTask.name || !newTask.dueDate) { console.log('invalid new task'); setInvalidTask(true); return}
+        setInvalidTask(false);
 
 
         props.addTask(newTask, props.currentProject.id);
@@ -25,8 +28,9 @@ export const NewTaskInput = ( props ) => {
 
             setNewTask( prev => ({
                 ...prev,
-                [selector]: newDate          
+                [selector]: newDate        
             }))
+           
             return
         }
 
@@ -36,18 +40,20 @@ export const NewTaskInput = ( props ) => {
         }))}
     
         const newTaskDateDisplay = () => {
-            const currDate = newTask.dueDate;
-            const day = ('0' + currDate.getDate()).slice(-2);
-            const month = ("0" + (currDate.getMonth() + 1)).slice(-2);
-            const year = currDate.getFullYear();
+            const date = newTask.dueDate;
+            const day = ("0" + date.getUTCDate()).slice(-2);
+            const month = ("0" + (date.getUTCMonth() + 1)).slice(-2);
+            const year = date.getFullYear() ;
             const formattedDate = `${year}-${month}-${day}`;
             return formattedDate;
 
         }
+
+        const inputClasses = `new-task-input ${invalidTask ? 'invalid' : null}`
    
     return (
         
-        <div className="new-task-input">
+        <div className={inputClasses}>
             <label htmlFor="taskName">Task name:
                 <input type="text"placeholder={'New Task'} value={newTask.name} maxLength={14} id='taskName' onChange={(e) => changeNewTask('name', e.target.value)}/>
             </label>

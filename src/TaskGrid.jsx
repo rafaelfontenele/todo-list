@@ -5,6 +5,8 @@ export const TaskGrid = ( props ) => {
     const [checkedTasks, setCheckedTasks] = useState([]);
     const taskList = props.currentProject.tasks;
     
+   
+
     const handleCheckmarkClick = (task, wasChecked) => {
         
         if (wasChecked) return;
@@ -31,7 +33,7 @@ export const TaskGrid = ( props ) => {
 
             return (
 
-                <div className={taskClasses} key={task.id}> {task.name} <Icon className={'checkmark'} iconName={checkmarkIconName} 
+                <div className={taskClasses} key={task.id}> {task.name} <div className="task-date">{task.dueDate}</div> <Icon className={'checkmark'} iconName={checkmarkIconName} 
                 onClick={() => handleCheckmarkClick(task, wasChecked)} /> </div>
 
             )

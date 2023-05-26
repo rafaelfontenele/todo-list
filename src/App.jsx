@@ -9,7 +9,7 @@ import { MainDisplay } from './MainDisplay';
 
 
 function App() {
-  const [showDashboard, setShowDashboard] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false); 
   const [showPForm, setShowPForm] = useState(false); 
   const [projects, setProjects] = useState([
     {
@@ -116,105 +116,32 @@ function App() {
         ]
 
       
-    },
-
-    {
-      name: '3Cozinha',
-      id: randomID(),
-      iconName: 'star',
-      tasks: 
-      [
-        {name: 'cook di33333nner',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'Do somet333hing else',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'whate33333ver',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'random3333Name()',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-        ]      
-    },
-
-    {
-      name: '4Cozinha',
-      id: randomID(),
-      iconName: 'star',
-      tasks: 
-      [
-        {name: 'cook 4444',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'Do 4444 else',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: '4444444',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: '444()',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-        ]      
-    },
-
-    {
-      name: '5Cozinha',
-      id: randomID(),
-      iconName: 'star',
-      tasks: 
-      [
-        {name: 'cook dinne5555r',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'Do some55555thing else',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'whate55555ver',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-
-        {name: 'randomN5555ame()',
-          dueDate: '23/05/2023',
-          completed: false,
-          id: randomID()},
-        ]      
     }
   ])
 
+  const [currentProject, setCurrentProject] = useState(projects[0]);
 
+
+  useEffect( () => {
+    if (currentProject == null) {
+      setShowDashboard( prev => true);
+    }
+  }, [currentProject])
   
   
   const handleKeyPress = (e) => {
     const keyPressed = (e.key)
     if (e.repeat) return;
-        
+    if (keyPressed == 'Enter') {
+      
+    }
+
     if (keyPressed == 'Escape') {
       if (showPForm) {
         setShowPForm(false);
         return
       }
+
       
       if (showDashboard) {
         setShowDashboard(false);
@@ -225,7 +152,6 @@ function App() {
 
   startKeyPressListener( handleKeyPress )
  
-  const [currentProject, setCurrentProject] = useState(projects[0]);
 
   const deleteProject = (deleteProject) => {
 
@@ -239,33 +165,69 @@ function App() {
     setProjects([...projects, newProject])
 
   }
+  const stringifyDate = (date) => {
+    const day = ("0" + date.getUTCDate()).slice(-2);
+    const month = ("0" + (date.getUTCMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+
+}
   const addTask = (newTask, projectId) => {
-    return
-    newTask = {name: newTask.name, dueDate: newTask.dueDate}
-    const _projects = [...projects];
+
+    newTask = {name: newTask.name, dueDate: stringifyDate(newTask.dueDate), completed: false, id: randomID()}
+    
+    const _projects = projects;
 
     _projects.map( project => {
       if (project.id === projectId) {
-        console.log(project.tasks);
-        project.tasks = [...project.tasks, newTask];
-
+        project.tasks.push(newTask);
+        setProjects( prev => [..._projects]);
       }
     })
-    setProjects( prev => {
-      [..._projects];
-    })
-
   }
 
   const removeTask = (taskId) => {
     const _projects = projects;
+    /*
     _projects.map( project => {
            project.tasks = project.tasks.filter( item => item.id !== taskId);
     })
-    setProjects(prev => [..._projects]);
+*/
+
+    _projects.map( project => {
+      project.tasks.map( task => {
+        if (task.id == taskId) {
+          project.tasks = project.tasks.filter( item => item.id !== taskId);
+          setProjects(prev => [..._projects]);
+        }
+      })
+    })
   }
 
-  
+  useEffect( () => {
+    if (currentProject) {
+      const currentId = currentProject.id;
+    
+    let flag = false;
+    projects.filter( project => {
+      if (project.id === currentId) {
+        flag = true;
+        setCurrentProject( prev => project)
+      }
+    })
+
+    if (!flag) {
+      setCurrentProject(projects[0]);
+    }
+  } else {
+    setCurrentProject( prev => projects[0])
+  } 
+
+
+  }, [projects])
+
+
 
 
   return (

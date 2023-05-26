@@ -67,7 +67,7 @@ export const ProjectForm = (props) => {
             <div className="inputWrapper">
 
                 <label htmlFor="projectName" >Project Name
-                <input type="text" id='projectName' maxLength={12} value={newProjectName} onChange={(e) => setnewProjectName( (prev) => (e.target.value))}/>
+                <input type="text" id='projectName' maxLength={11} value={newProjectName} onChange={(e) => setnewProjectName( (prev) => (e.target.value))}/>
                 </label>
 
             </div>

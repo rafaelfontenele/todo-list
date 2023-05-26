@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;1,500;1,600;1,700&family=Kanit:ital,wght@0,200;0,300;0,500;1,600&family=Montserrat:ital,wght@0,100;0,300;0,500;1,200;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@600&family=Roboto+Slab:wght@100;300;500&family=Roboto:wght@100;300;400;500;700;900&family=Space+Grotesk:wght@600&family=Tangerine:wght@700&display=swap');
 
 :root {
     --sidebar-blue: rgba(25, 146, 212, 1);
@@ -11,7 +12,7 @@
     --light-red: #ff9c9c;
     --main-color: rgba(145, 99, 99, 1);
     --form-color: rgba(200, 200, 200, 0.9);
-    --main-font: sans-serif;
+    --main-font: 'Space Grotesk', sans-serif;
 }
 
 
@@ -351,7 +352,7 @@ background: #2c2c2c;
     background-color: rgba( 0,0,0, 0.3);
     display: grid;
     grid-auto-rows: 15%;
-    gap: 0.3%;
+    gap: 3%;
     padding: 2% 0%;
     overflow-y: scroll;
 }
@@ -359,7 +360,7 @@ background: #2c2c2c;
 .task-grid-title {
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     text-align: center;
 
 }
@@ -381,8 +382,17 @@ background: #2c2c2c;
     text-decoration: line-through;
     text-decoration-color: transparent;
     margin: 0.5% 0%;
-
-
+    transition: all 200ms ease-in-out;
+}
+.task-date {
+    justify-content: center;
+    align-self: center;
+    margin-left: auto;
+}
+.task:hover {
+    border: 1px solid black;
+    transform: scale(1.002);
+    cursor: pointer;
 }
 
 .task.checked .checkmark {
@@ -412,9 +422,56 @@ background: #2c2c2c;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5%;
+    gap: 10%;
+}
+.new-task-input input {
+    margin-left: 1vw;
 }
 
+.new-task-input button {
+    padding: 0.5% 2%;
+}
+.new-task-input button:hover {
+    transform:scale(1.02);
+    cursor: pointer;
+}
+
+.new-task-input.invalid input[type=text] {
+    border-color: red;
+    animation: invalidTaskName 400ms forwards 1;
+}
+
+.no-project-main-display {
+    align-self: center;
+    justify-self: center;
+    font-size: 2.5rem;
+    margin-left: -4%;
+    margin-top: 20%;
+}
+
+
+@keyframes invalidTaskName {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.02);
+    }
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
 
 
 
