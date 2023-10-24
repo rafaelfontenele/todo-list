@@ -1,4 +1,4 @@
 # todo-list
 React-JS-css
 
-LIVE: https://etzoider.github.io/todo-list/
+LIVE: https://rafaelfontenele.github.io/todo-list/
